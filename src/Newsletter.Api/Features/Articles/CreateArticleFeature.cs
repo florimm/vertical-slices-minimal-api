@@ -7,13 +7,7 @@ namespace Newsletter.Api.Features.Articles
     public static class CreateArticleFeature
     {
         public static void Register(this IEndpointRouteBuilder endpoints) =>
-            endpoints.MapPost(
-                "api/articles",
-                async (
-                    [AsParameters] CreateArticleRequest request,
-                    [FromServices] IDbContext context,
-                    IValidator<CreateArticleRequest> validator
-                    ) => await Handle(request, context, validator));
+            endpoints.MapPost("api/articles", Handle);
 
         public static async Task<IResult> Handle(CreateArticleRequest request, IDbContext context, IValidator<CreateArticleRequest> validator)
         {
